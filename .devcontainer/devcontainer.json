@@ -14,10 +14,26 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
+		"eamodio.gitlens",
 		"dbaeumer.vscode-eslint",
+		"ms-vscode.vscode-typescript-tslint-plugin",
 		"mongodb.mongodb-vscode",
-		"golang.go"
-	],
+		"golang.go",
+		"rangav.vscode-thunder-client",
+		"mikael.angular-beastcode",
+		"angular.ng-template",
+		"nrwl.angular-console",
+		"formulahendry.auto-close-tag",
+		"coenraads.bracket-pair-colorizer",
+		"abusaidm.html-snippets",
+		"johnpapa.vscode-peacock",
+		"googlecloudtools.cloudcode",
+		"eg2.vscode-npm-script",
+		"christian-kohler.npm-intellisense",
+		"esbenp.prettier-vscode",
+		"ms-python.python",
+		"zxh404.vscode-proto3"
+	],w
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [3000, 27017],

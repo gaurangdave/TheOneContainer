@@ -16,33 +16,49 @@ ARG USER_GID=$USER_UID
 RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --gid $USER_GID node && usermod --uid $USER_UID --gid $USER_GID node; fi
 
 ARG LOCAL=/usr/local
-# Installing Protocol Buffer Compiler
-# ARG PROTOC_VERSION=3.15.8
-# RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip \
-#     && unzip protoc-${PROTOC_VERSION}-linux-x86_64.zip -d ${LOCAL}/protoc \
-#     && rm protoc-${PROTOC_VERSION}-linux-x86_64.zip
-# ENV PATH $PATH:${LOCAL}/protoc/bin
+ARG HOME=/home/node
+ARG PLATFORM=/workspace/platform
 
-ARG PROTOC_VERSION=3.15.8
-RUN curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip \
-    && sudo unzip -o protoc-${PROTOC_VERSION}-linux-x86_64.zip -d /usr/local bin/protoc \
-    && sudo unzip -o protoc-${PROTOC_VERSION}-linux-x86_64.zip -d /usr/local 'include/*' \
-    && rm -f protoc-${PROTOC_VERSION}-linux-x86_64.zip
 
 
 # Installing Go Lang
 ARG GO_VERSION=1.16.3
-RUN wget -c https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz -O - | sudo tar -xz -C ${LOCAL}
-# ENV GOPATH ${HOME}/go
-ENV PATH $PATH:${LOCAL}/go/bin
+RUN wget https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz \
+    && tar -C ${LOCAL} -xzf go${GO_VERSION}.linux-amd64.tar.gz \
+    && rm go${GO_VERSION}.linux-amd64.tar.gz
+ENV GOPATH ${HOME}/go
+ENV PATH $PATH:${LOCAL}/go/bin:$GOPATH/bin
+
+
+# Installing Protocol Buffer Compiler
+ARG PROTOC_VERSION=3.15.8
+RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip \
+    && sudo unzip protoc-${PROTOC_VERSION}-linux-x86_64.zip -d ${LOCAL} bin/protoc \
+    && sudo unzip -o protoc-${PROTOC_VERSION}-linux-x86_64.zip -d ${LOCAL}/.local/ include/* \
+    && rm protoc-${PROTOC_VERSION}-linux-x86_64.zip
+# ENV PROTOC_PATH ${HOME}/go    
+# ENV PATH $PATH:${HOME}/.local/bin/protoc
+
 
 
 # Installing Protocol Buffer Go Plugin
 ARG PROTOC_GEN_GO_VERSION=1.26.0
 RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@v${PROTOC_GEN_GO_VERSION}
+ENV PATH $PATH:${HOME}/go/bin/protoc-gen-go
 
 ARG PROTOC_GEN_GO_GRPC_VERSION=1.1.0
 RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v${PROTOC_GEN_GO_GRPC_VERSION}
+ENV PATH $PATH:${HOME}/go/bin/protoc-gen-go-grpc
+
+RUN go get google.golang.org/grpc
+
+ENV PATH $PATH:$(go env GOPATH)/bin
+            
+# Exporting path for all go libraries.
+ENV PATH $PATH:${HOME}/go/bin
+
+# 
+RUN sudo chown -R node:node /home/node/
 
 # Additional libraries and frameworks
 RUN su node -c "npm install -g typescript"
