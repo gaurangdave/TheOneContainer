@@ -53,7 +53,7 @@ ENV PATH $PATH:${HOME}/go/bin/protoc-gen-go-grpc
 RUN go get google.golang.org/grpc
 
 ENV PATH $PATH:$(go env GOPATH)/bin
-            
+
 # Exporting path for all go libraries.
 ENV PATH $PATH:${HOME}/go/bin
 
