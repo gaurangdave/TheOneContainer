@@ -10,6 +10,7 @@ That is why I created this one container to rule them all. Basically for now thi
 
 This container builds a development environment with following platform support, 
 
+- Java
 - NodeJS 14
 - Mongo DB
 - Go Lang 1.16
@@ -25,3 +26,11 @@ This container builds a development environment with following platform support,
 ## TODO
 - Add VSCode plusgins to `.devContainer` files to auto install all required plugs. 
 
+
+## Usefull Commands
+
+### SSH into Docker Container
+- Get list of active containers by running either of following commands, 
+  - `docker container ls` or `docker ps`
+- SSH into the container by running following commands, 
+  - `docker exec -it "Container ID" /bin/bash`

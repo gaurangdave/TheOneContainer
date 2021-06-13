@@ -51,6 +51,7 @@ RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v${PROTOC_GEN_GO_GR
 ENV PATH $PATH:${HOME}/go/bin/protoc-gen-go-grpc
 
 RUN go get google.golang.org/grpc
+RUN go get go.mongodb.org/mongo-driver/mongo
 
 ENV PATH $PATH:$(go env GOPATH)/bin
 
@@ -71,6 +72,16 @@ RUN su node -c "npm install -g firebase-tools"
 
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
+# Install JAVA
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    openjdk-11-jre
+
+# Prints installed java version, just for checking
+RUN java --version
+
+# Custom Environment Variables
+ENV FIRESTORE_EMULATOR_HOST=localhost:9002
 
 # [Optional] Uncomment if you want to install an additional version of node using nvm
 # ARG EXTRA_NODE_VERSION=10
