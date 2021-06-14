@@ -19,8 +19,6 @@ ARG LOCAL=/usr/local
 ARG HOME=/home/node
 ARG PLATFORM=/workspace/platform
 
-
-
 # Installing Go Lang
 ARG GO_VERSION=1.16.3
 RUN wget https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz \
@@ -28,7 +26,6 @@ RUN wget https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz \
     && rm go${GO_VERSION}.linux-amd64.tar.gz
 ENV GOPATH ${HOME}/go
 ENV PATH $PATH:${LOCAL}/go/bin:$GOPATH/bin
-
 
 # Installing Protocol Buffer Compiler
 ARG PROTOC_VERSION=3.15.8
@@ -39,7 +36,11 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC
 # ENV PROTOC_PATH ${HOME}/go    
 # ENV PATH $PATH:${HOME}/.local/bin/protoc
 
-
+# Installing EVANs CLI
+ARG EVANS_CLI_VERSION=0.9.3
+RUN wget https://github.com/ktr0731/evans/releases/download/${EVANS_CLI_VERSION}/evans_linux_amd64.tar.gz \
+    && tar -C /usr/local/bin/ -xzf evans_linux_amd64.tar.gz \
+    && rm evans_linux_amd64.tar.gz
 
 # Installing Protocol Buffer Go Plugin
 ARG PROTOC_GEN_GO_VERSION=1.26.0
