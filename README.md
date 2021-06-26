@@ -34,3 +34,10 @@ This container builds a development environment with following platform support,
   - `docker container ls` or `docker ps`
 - SSH into the container by running following commands, 
   - `docker exec -it "Container ID" /bin/bash`
+
+
+## FAQs
+
+-   How to fix permission issues on VS Code along with dev container?
+    - Running the following in host directory and container, this might now be ideal but seems to fix the issue for now. 
+    `sudo chmod -R a+rwx .`

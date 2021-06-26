@@ -64,10 +64,9 @@ RUN sudo chown -R node:node /home/node/
 
 # Additional libraries and frameworks
 RUN su node -c "npm install -g typescript"
+RUN su node -c "npm install -g firebase-tools"
 RUN su node -c "npm install -g @angular/cli"
 RUN su node -c "npm install -g @nestjs/cli"
-RUN su node -c "npm install -g firebase-tools"
-
 
 # [Optional] Uncomment this section to install additional OS packages.
 
