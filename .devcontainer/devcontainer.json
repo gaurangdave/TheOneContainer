@@ -33,7 +33,21 @@
 		"esbenp.prettier-vscode",
 		"ms-python.python",
 		"zxh404.vscode-proto3",
-		"ritwickdey.liveserver"
+		"ritwickdey.liveserver",
+		"github.copilot",
+		"hookyqr.beautify",
+		"vangware.dark-plus-material",
+		"dart-code.flutter",
+		"ecmel.vscode-html-css",
+		"gregorbiswanger.json2ts",
+		"ritwickdey.live-sass",
+		"davidanson.vscode-markdownlint",
+		"pkief.material-icon-theme",
+		"pnp.polacode",
+		"hbenl.vscode-test-explorer",
+		"visualstudioexptteam.vscodeintellicode",
+		"ashinzekene.nestjs",
+		"abhijoybasak.nestjs-files"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
