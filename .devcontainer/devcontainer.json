@@ -6,12 +6,10 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
-
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
-
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"eamodio.gitlens",
@@ -41,7 +39,6 @@
 		"ecmel.vscode-html-css",
 		"gregorbiswanger.json2ts",
 		"ritwickdey.live-sass",
-		"davidanson.vscode-markdownlint",
 		"pkief.material-icon-theme",
 		"pnp.polacode",
 		"hbenl.vscode-test-explorer",
@@ -49,15 +46,22 @@
 		"ashinzekene.nestjs",
 		"abhijoybasak.nestjs-files"
 	],
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		3000, 27017, 4200, 9000, 9001, 9002, 9003, 9004, 9005, 9006, 9090
+		3000,
+		27017,
+		4200,
+		9000,
+		9001,
+		9002,
+		9003,
+		9004,
+		9005,
+		9006,
+		9090
 	],
-
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "yarn install",
-
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "node",
 	"portsAttributes": {
